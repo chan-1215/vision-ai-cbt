@@ -1,0 +1,17 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto');
+const root=path.join(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8').replace(/\r\n/g,'\n');
+const write=(p,s)=>{const f=path.join(root,p);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,s);};
+const esc=s=>s.replace(/<\/script/gi,'<\\/script');
+const report=JSON.parse(read('src/sql/mysql-compat-report.json'));
+const sourceHash=crypto.createHash('sha256').update(['engine.js','mysql-compat.js','content.js'].map(n=>read('src/sql/'+n)).join('\n')).digest('hex');
+if(report.sourceHash!==sourceHash||report.passed!==report.total)throw Error('SQL compatibility report does not match the source. Revalidate before building. See docs/VALIDATION.md.');
+const worker=read('node_modules/sql.js/dist/sql-wasm.js')+'\n'+read('node_modules/node-sql-parser/umd/mysql.umd.js')+'\n'+read('src/sql/engine.js')+'\n'+read('src/sql/mysql-compat.js')+'\nconst WASM_B64='+JSON.stringify(fs.readFileSync(path.join(root,'node_modules/sql.js/dist/sql-wasm.wasm')).toString('base64'))+';\n'+read('src/sql/worker.js');
+const licenses=['sql.js (MIT)\n'+read('node_modules/sql.js/LICENSE'),'node-sql-parser (Apache-2.0)\n'+read('node_modules/node-sql-parser/LICENSE')].join('\n\n');
+const sqlParts={STYLE:read('src/sql/style.css'),WORKER_BUNDLE_JS:esc(worker),ENGINE_BUNDLE_JS:esc(read('src/sql/engine.js')+'\n'+read('src/sql/mysql-compat.js')),CONTENT_BUNDLE_JS:esc(read('src/sql/content.js')+'\nwindow.LICENSE_TEXT='+JSON.stringify(licenses)+';\nwindow.COMPAT_REPORT='+JSON.stringify(report)+';'),APP_JS:esc(read('src/sql/app.js'))};
+let sql=read('src/sql/index.template.html');for(const[k,v]of Object.entries(sqlParts))sql=sql.replace('__'+k+'__',()=>v);
+write('public/sql/index.html',sql);write('src/sql/worker.bundle.js',worker);
+let bd=read('src/bigdata/index.template.html');
+for(const n of ['style.css','data.js','code-questions.js','choice-questions.js','app.js'])bd=bd.replace(n==='style.css'?'__STYLE__':'__'+n.toUpperCase().replaceAll('.','_').replaceAll('-','_')+'__',()=>n==='style.css'?read('src/bigdata/'+n):esc(read('src/bigdata/'+n)));
+write('public/bigdata/index.html',bd);
+console.log('Built public/sql/index.html and public/bigdata/index.html.');

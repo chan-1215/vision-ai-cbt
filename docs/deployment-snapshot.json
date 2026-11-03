@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-11-03T16:13:24.582Z",
+  "site": "https://vision-ai-cbt.pages.dev/",
+  "pages": [
+    {
+      "url": "https://vision-ai-cbt.pages.dev/",
+      "path": "public/index.html",
+      "bytes": 6898,
+      "sha256": "2dfd266e138e7e863cbfc3f20405ee6b419fbe51e9c44ba60ebe49d0a52357d5",
+      "httpStatus": 200,
+      "repositorySha256": "1d6d41bfbf04aa584981fae4301f80a3956042a7d4e81139153caad627d74c75",
+      "repositoryBytes": 6880,
+      "note": "Repository build normalizes source line endings to LF. Fetched SHA-256 above records the original HTTP body."
+    },
+    {
+      "url": "https://vision-ai-cbt.pages.dev/sql/",
+      "path": "public/sql/index.html",
+      "bytes": 1449774,
+      "sha256": "4a612348d6a09aafa91d0eec1bf8645d1973a4906a23875e8cfe3a41e713bd60",
+      "httpStatus": 200,
+      "repositorySha256": "b70e56f73fc6f56b46c030d81c9e0203492fbf8538ff2c5cf765886ada1fc2a5",
+      "repositoryBytes": 1448075,
+      "note": "Repository build normalizes source line endings to LF. Fetched SHA-256 above records the original HTTP body."
+    },
+    {
+      "url": "https://vision-ai-cbt.pages.dev/bigdata/",
+      "path": "public/bigdata/index.html",
+      "bytes": 249013,
+      "sha256": "f793c3ba59715283f0b41ac869611b16cf250a02ddd773cb9f8e80a24fa18ea3",
+      "httpStatus": 200,
+      "repositorySha256": "9c7ff7b908a743a61b437c519ce3dac9333b19cacd7ac6cd9fb5274974ecc3af",
+      "repositoryBytes": 247368,
+      "note": "Repository build normalizes source line endings to LF. Fetched SHA-256 above records the original HTTP body."
+    }
+  ]
+}

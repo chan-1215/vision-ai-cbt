@@ -1,0 +1,1235 @@
+{
+  "reference": "MySQL 8.0.46 / strict / utf8mb4_0900_ai_ci",
+  "sourceHash": "c25d2ed3c38782d98a6b3d15611a011be8a1fedaa8917d1e1f5551a7b8f614ea",
+  "checkedAt": "2026-10-27T12:13:55.628Z",
+  "total": 175,
+  "passed": 175,
+  "failures": [],
+  "tests": [
+    {
+      "label": "s01 매장 데이터베이스 만들기",
+      "sql": "CREATE DATABASE store_lab CHARACTER SET utf8mb4",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s02 작업할 DB 선택하기",
+      "sql": "USE store_lab",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s03 현재 DB 이름 확인",
+      "sql": "SELECT DATABASE()",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s04 상품 테이블 설계",
+      "sql": "CREATE TABLE products (\n  product_id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(50) NOT NULL,\n  category VARCHAR(20),\n  price INT NOT NULL,\n  stock INT,\n  added_on DATE\n)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s04 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s05 테이블 구조 살펴보기",
+      "sql": "DESC products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s06 메모 열 추가하기",
+      "sql": "ALTER TABLE products ADD memo VARCHAR(100)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s06 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s07 첫 상품 한 개 등록",
+      "sql": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('무선 마우스', '전자', 18000, 12, '2026-10-01')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s07 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s08 나머지 상품 등록",
+      "sql": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('기계식 키보드', '전자', 55000, 5, '2026-10-02'),\n  ('USB 허브', '전자', 25000, 8, '2026-10-03'),\n  ('스프링 노트', '문구', 3000, 30, '2026-10-04'),\n  ('검정 볼펜', '문구', 1500, 50, '2026-10-05'),\n  ('텀블러', '생활', 12000, 10, '2026-10-06'),\n  ('머그컵', '생활', 8000, 15, '2026-10-07'),\n  ('충전 케이블', '전자', 9000, 20, '2026-10-08'),\n  ('형광펜 세트', '문구', 5000, 25, '2026-10-09'),\n  ('장바구니', '생활', 4000, 18, '2026-10-10'),\n  ('선물 포장', NULL, 1000, NULL, '2026-10-11'),\n  ('노트북 파우치', '생활', 22000, 6, '2026-10-12')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s08 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s09 등록 수 확인",
+      "sql": "SELECT COUNT(*) AS 상품수 FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s10 모든 열·행 조회",
+      "sql": "SELECT * FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s11 필요한 열만 선택",
+      "sql": "SELECT name, price FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s12 한글 별명 붙이기",
+      "sql": "SELECT name AS 상품명, price AS 가격 FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s13 열 순서 바꾸기",
+      "sql": "SELECT price, name FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s14 전자 상품 찾기",
+      "sql": "SELECT name, category, price FROM products WHERE category = '전자'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s15 경계값을 포함한 비교",
+      "sql": "SELECT name, price FROM products WHERE price >= 12000",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s16 같지 않은 값 찾기",
+      "sql": "SELECT name, category FROM products WHERE category != '문구'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s17 두 조건 모두 만족",
+      "sql": "SELECT name, category, price FROM products WHERE category = '전자' AND price <= 25000",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s18 둘 중 하나를 만족",
+      "sql": "SELECT name, category FROM products WHERE category = '문구' OR category = '생활'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s19 괄호로 조건 묶기",
+      "sql": "SELECT name, category, price FROM products WHERE (category = '전자' OR category = '생활') AND price >= 12000",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s20 비어 있는 재고 찾기",
+      "sql": "SELECT name, stock FROM products WHERE stock IS NULL",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s21 분류가 입력된 상품",
+      "sql": "SELECT name, category FROM products WHERE category IS NOT NULL",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s22 가격 범위로 찾기",
+      "sql": "SELECT name, price FROM products WHERE price BETWEEN 5000 AND 20000",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s23 목록 중 하나 찾기",
+      "sql": "SELECT name, category FROM products WHERE category IN ('전자', '문구')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s24 이름 일부로 찾기",
+      "sql": "SELECT name, price FROM products WHERE name LIKE '%노트%'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s25 이름 끝부분 검색",
+      "sql": "SELECT name, price FROM products WHERE name LIKE '%세트'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s26 싼 상품부터 정렬",
+      "sql": "SELECT name, price FROM products ORDER BY price ASC, product_id ASC",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s27 최근 입고 순서",
+      "sql": "SELECT name, added_on FROM products ORDER BY added_on DESC, product_id DESC",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s28 중복 없이 분류 보기",
+      "sql": "SELECT DISTINCT category FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s29 가격 상위 3개",
+      "sql": "SELECT name, price FROM products ORDER BY price DESC, product_id ASC LIMIT 3",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s30 조건·정렬·제한 합치기",
+      "sql": "SELECT name, category, price FROM products WHERE category = '전자' ORDER BY price DESC, product_id ASC LIMIT 2",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s31 한 상품 가격 수정",
+      "sql": "UPDATE products SET price = 20000 WHERE product_id = 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s31 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s32 여러 상품 재고 올리기",
+      "sql": "UPDATE products SET stock = stock + 5 WHERE product_id IN (1, 3)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s32 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s33 분류 전체 가격 인상",
+      "sql": "UPDATE products SET price = price + 500 WHERE category = '문구'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s33 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s34 메모 기록하기",
+      "sql": "UPDATE products SET memo = '인기상품' WHERE product_id = 2",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s34 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s35 대표 집계 한 번에 보기",
+      "sql": "SELECT COUNT(*) AS 상품수, SUM(price) AS 가격합계, AVG(price) AS 평균가격, MAX(price) AS 최고가격, MIN(price) AS 최저가격 FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s36 COUNT의 차이",
+      "sql": "SELECT COUNT(*) AS 전체행, COUNT(stock) AS 재고입력행 FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s37 조건으로 고른 뒤 합계",
+      "sql": "SELECT SUM(price) AS 전자총액 FROM products WHERE category = '전자'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s38 분류별 상품 수",
+      "sql": "SELECT category, COUNT(*) AS 상품수 FROM products GROUP BY category",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s39 분류별 합계와 평균",
+      "sql": "SELECT category, COUNT(*) AS 상품수, SUM(price) AS 가격합계, AVG(price) AS 평균가격 FROM products GROUP BY category ORDER BY 가격합계 DESC, category ASC",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s40 행 조건과 그룹 결합",
+      "sql": "SELECT category, COUNT(*) AS 상품수 FROM products WHERE price >= 5000 GROUP BY category ORDER BY category ASC",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s41 삭제 연습용 상품 추가",
+      "sql": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('테스트 상품', NULL, 0, 0, '2026-10-20')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s41 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s42 지울 상품 번호 확인",
+      "sql": "SELECT product_id, name FROM products WHERE name = '테스트 상품'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s43 번호로 한 행 삭제",
+      "sql": "DELETE FROM products WHERE product_id = 13",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s43 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s44 삭제 후 상품 수",
+      "sql": "SELECT COUNT(*) AS 상품수 FROM products",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s45 다음 자동 번호 정리",
+      "sql": "ALTER TABLE products AUTO_INCREMENT = 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s45 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s46 자동 번호 다시 확인",
+      "sql": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('테스트 상품2', NULL, 0, 0, '2026-10-21')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s46 자동 번호 다시 확인",
+      "sql": "SELECT product_id, name FROM products WHERE name = '테스트 상품2'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s47 이름으로 삭제",
+      "sql": "DELETE FROM products WHERE name = '테스트 상품2'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s47 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s48 최종 분류별 보고서",
+      "sql": "SELECT category AS 분류, COUNT(*) AS 상품수, SUM(price) AS 가격합계 FROM products WHERE category IS NOT NULL GROUP BY category ORDER BY 가격합계 DESC, 분류 ASC",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s49 연습용 작은 표 만들기",
+      "sql": "CREATE TABLE scratch (note VARCHAR(20))",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s49 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s49 scratch",
+      "sql": "SELECT * FROM scratch ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s50 작은 표에 데이터 넣기",
+      "sql": "INSERT INTO scratch (note) VALUES ('확인용')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s50 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s50 scratch",
+      "sql": "SELECT * FROM scratch ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s51 행만 전부 지우기",
+      "sql": "DELETE FROM scratch",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s51 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s51 scratch",
+      "sql": "SELECT * FROM scratch ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "s52 빈 테이블 자체 삭제",
+      "sql": "DROP TABLE scratch",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "state s52 products",
+      "sql": "SELECT * FROM products ORDER BY 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 1",
+      "sql": "CREATE DATABASE compat_diff CHARACTER SET utf8mb4",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 2",
+      "sql": "USE compat_diff",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 3",
+      "sql": "CREATE TABLE text_test(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), qty INT, price DECIMAL(8,2), d DATE)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 4",
+      "sql": "INSERT INTO text_test(name,qty,price,d) VALUES('ABC',1,2.675,'2026-1-2'),('abc',2,3.125,'26-2-3'),('Café',3,4.5,20261027),('CAFE',4,5.0,NULL),('가나다',0,6.5,'2026-10-27'),(NULL,NULL,NULL,NULL),('a ',5,0,NULL)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 5",
+      "sql": "SELECT name FROM text_test WHERE name='abc' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 6",
+      "sql": "SELECT name FROM text_test WHERE name='cafe' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 7",
+      "sql": "SELECT name FROM text_test WHERE name LIKE '%A%' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 8",
+      "sql": "SELECT name FROM text_test WHERE name LIKE 'caf_' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 9",
+      "sql": "SELECT DISTINCT name FROM text_test ORDER BY name",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 10",
+      "sql": "SELECT name,COUNT(*) AS n,SUM(qty) AS total FROM text_test GROUP BY name ORDER BY name",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 11",
+      "sql": "SELECT name FROM text_test ORDER BY name DESC LIMIT 4",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 12",
+      "sql": "SELECT name FROM text_test ORDER BY name LIMIT 2,3",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 13",
+      "sql": "SELECT name FROM text_test WHERE qty='02' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 14",
+      "sql": "SELECT name FROM text_test WHERE name IN ('ABC',NULL) ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 15",
+      "sql": "SELECT name FROM text_test WHERE name NOT IN ('ABC',NULL) ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 16",
+      "sql": "SELECT name FROM text_test WHERE name BETWEEN 'a' AND 'cafe' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 17",
+      "sql": "SELECT name,price FROM text_test WHERE id=999",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 18",
+      "sql": "SELECT COUNT(*) AS n,COUNT(qty) AS q,AVG(qty) AS avgq,MAX(qty) AS maxq,MIN(qty) AS minq,SUM(qty) AS sumq FROM text_test",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 19",
+      "sql": "SELECT COUNT(*) AS n,AVG(qty) AS avgq,SUM(qty) AS sumq FROM text_test WHERE id=999",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 20",
+      "sql": "SELECT 'A'='a' AS x,'é'='e' AS y,'ß'='ss' AS z,'a'='a ' AS space",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 21",
+      "sql": "SELECT 'é' LIKE 'e' AS x,'ß' LIKE 'ss' AS y",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 22",
+      "sql": "SELECT 7/2 AS v,5 DIV 2 AS d,5%2 AS m,'10abc'=10 AS eq",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 23",
+      "sql": "SELECT name AS label FROM text_test WHERE label='ABC'",
+      "ok": true,
+      "expectedError": 1054,
+      "error": "1054: WHERE에서는 SELECT 별명이 아니라 원래 열 이름을 사용하세요."
+    },
+    {
+      "label": "compat 24",
+      "sql": "SELECT name,COUNT(*) FROM text_test GROUP BY qty",
+      "ok": true,
+      "expectedError": 1055,
+      "error": "1055: name 열을 GROUP BY에 적거나 집계 함수로 감싸세요."
+    },
+    {
+      "label": "compat 25",
+      "sql": "SELECT name,COUNT(*) FROM text_test",
+      "ok": true,
+      "expectedError": 1140,
+      "error": "1140: name 열을 GROUP BY에 적거나 집계 함수로 감싸세요."
+    },
+    {
+      "label": "compat 26",
+      "sql": "SELECT name,COUNT(*) AS n FROM text_test WHERE name='ABC'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 27",
+      "sql": "SELECT id,name,COUNT(*) AS n FROM text_test GROUP BY id ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 28",
+      "sql": "SELECT name,COUNT(*) AS n FROM text_test GROUP BY name ORDER BY qty",
+      "ok": true,
+      "expectedError": 1055,
+      "error": "1055: qty 열을 GROUP BY에 적거나 집계 함수로 감싸세요."
+    },
+    {
+      "label": "compat 29",
+      "sql": "SELECT DISTINCT name FROM text_test ORDER BY qty",
+      "ok": true,
+      "expectedError": 3065,
+      "error": "3065: DISTINCT 조회에서 ORDER BY에 쓰는 열을 SELECT에 포함하세요."
+    },
+    {
+      "label": "compat 30",
+      "sql": "SELECT name AS label,COUNT(*) AS n FROM text_test GROUP BY label ORDER BY label",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 31",
+      "sql": "SELECT name,COUNT(*) AS n FROM text_test GROUP BY 1 ORDER BY name",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 32",
+      "sql": "INSERT INTO text_test(name,qty) VALUES('rounded',2.5),('negative',-2.5),('numeric','5.6')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 33",
+      "sql": "SELECT id,name,qty FROM text_test WHERE id>=8 ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 34",
+      "sql": "INSERT INTO text_test(name,qty) VALUES('bad','oops')",
+      "ok": true,
+      "expectedError": 1366,
+      "error": "1366: qty 열의 정수 값을 변환할 수 없습니다."
+    },
+    {
+      "label": "compat 35",
+      "sql": "INSERT INTO text_test(name,qty) VALUES('bad','12abc')",
+      "ok": true,
+      "expectedError": 1265,
+      "error": "1265: qty 열의 정수 값을 변환할 수 없습니다."
+    },
+    {
+      "label": "compat 36",
+      "sql": "INSERT INTO text_test(name,qty) VALUES('overflow',2147483648)",
+      "ok": true,
+      "expectedError": 1264,
+      "error": "1264: qty 열의 정수 범위를 벗어났습니다."
+    },
+    {
+      "label": "compat 37",
+      "sql": "INSERT INTO text_test(name,d) VALUES('date-bad','2026-02-30')",
+      "ok": true,
+      "expectedError": 1292,
+      "error": "1292: d 열에 존재하지 않는 날짜를 넣었습니다."
+    },
+    {
+      "label": "compat 38",
+      "sql": "INSERT INTO text_test(name,price) VALUES('money',2.675)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 39",
+      "sql": "SELECT name,price FROM text_test WHERE name='money'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 40",
+      "sql": "CREATE TABLE strict_test(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(4) UNIQUE,x INT NOT NULL,u INT UNSIGNED,flag TINYINT,d DATE)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 41",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('A',1),('B',2)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 42",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('a',3)",
+      "ok": true,
+      "expectedError": 1062,
+      "error": "1062: UNIQUE 또는 PRIMARY KEY 값이 중복됩니다."
+    },
+    {
+      "label": "compat 43",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('C',NULL)",
+      "ok": true,
+      "expectedError": 1048,
+      "error": "1048: x 열에는 NULL을 넣을 수 없습니다."
+    },
+    {
+      "label": "compat 44",
+      "sql": "INSERT INTO strict_test(name) VALUES('C')",
+      "ok": true,
+      "expectedError": 1364,
+      "error": "1364: x 열에 기본값이 없습니다. INSERT에서 값을 지정하세요."
+    },
+    {
+      "label": "compat 45",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('C',3)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 46",
+      "sql": "INSERT INTO strict_test(id,name,x) VALUES(0,'zero',0)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 47",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('large',1)",
+      "ok": true,
+      "expectedError": 1406,
+      "error": "1406: name 열은 최대 4자입니다."
+    },
+    {
+      "label": "compat 48",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('Z   ',1)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 49",
+      "sql": "INSERT INTO strict_test(name,x,u) VALUES('neg',1,-1)",
+      "ok": true,
+      "expectedError": 1264,
+      "error": "1264: u 열의 정수 범위를 벗어났습니다."
+    },
+    {
+      "label": "compat 50",
+      "sql": "INSERT INTO strict_test(name,x,flag) VALUES('flag',1,128)",
+      "ok": true,
+      "expectedError": 1264,
+      "error": "1264: flag 열의 정수 범위를 벗어났습니다."
+    },
+    {
+      "label": "compat 51",
+      "sql": "SELECT id,name,x FROM strict_test ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 52",
+      "sql": "UPDATE strict_test SET x=x+1,u=x WHERE id=1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 53",
+      "sql": "SELECT id,x,u FROM strict_test WHERE id=1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 54",
+      "sql": "UPDATE strict_test SET x=x",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 55",
+      "sql": "SET SQL_SAFE_UPDATES=1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 56",
+      "sql": "UPDATE strict_test SET x=9 WHERE name='B'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 57",
+      "sql": "UPDATE strict_test SET x=9",
+      "ok": true,
+      "expectedError": 1175,
+      "error": "1175: SQL_SAFE_UPDATES가 켜져 있습니다. 키를 사용하는 WHERE 또는 LIMIT을 적어 주세요."
+    },
+    {
+      "label": "compat 58",
+      "sql": "UPDATE strict_test SET x=x+1 LIMIT 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 59",
+      "sql": "DELETE FROM strict_test LIMIT 1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 60",
+      "sql": "SET SQL_SAFE_UPDATES=0",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 61",
+      "sql": "SELECT id,name,x FROM strict_test ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 62",
+      "sql": "DELETE FROM strict_test WHERE name='b'",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 63",
+      "sql": "ALTER TABLE strict_test AUTO_INCREMENT=1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 64",
+      "sql": "INSERT INTO strict_test(name,x) VALUES('end',1)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 65",
+      "sql": "SELECT id,name,x FROM strict_test ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 66",
+      "sql": "DESC strict_test",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 67",
+      "sql": "CREATE TABLE failed_batch(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(12) UNIQUE)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 68",
+      "sql": "INSERT INTO failed_batch(name) VALUES('a'),('A'),('b')",
+      "ok": true,
+      "expectedError": 1062,
+      "error": "1062: UNIQUE 또는 PRIMARY KEY 값이 중복됩니다."
+    },
+    {
+      "label": "compat 69",
+      "sql": "INSERT INTO failed_batch(name) VALUES('ok')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 70",
+      "sql": "SELECT * FROM failed_batch ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 71",
+      "sql": "CREATE TABLE char_test(id INT PRIMARY KEY,c CHAR(6),v VARCHAR(6))",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 72",
+      "sql": "INSERT INTO char_test VALUES(1,'abc  ','abc  ')",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 73",
+      "sql": "SELECT c,v,CHAR_LENGTH(c) AS lc,CHAR_LENGTH(v) AS lv FROM char_test",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 74",
+      "sql": "SELECT MIN(name) AS min_name,MAX(name) AS max_name FROM text_test",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 75",
+      "sql": "SELECT AVG(price) AS p FROM text_test",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 76",
+      "sql": "SELECT COUNT(DISTINCT name) AS n FROM text_test",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 77",
+      "sql": "SELECT name,COUNT(*) AS n FROM text_test GROUP BY name HAVING n>=2 ORDER BY name",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 78",
+      "sql": "SELECT name,SUM(qty) AS total FROM text_test GROUP BY name ORDER BY total+1 DESC,name",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 79",
+      "sql": "SELECT 2 IS TRUE AS a,0 IS FALSE AS b,NULL IS TRUE AS c,NULL IS NOT TRUE AS d",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 80",
+      "sql": "SELECT 1e-3 AS n,.5 AS half,-1.5e+2 AS negative",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 81",
+      "sql": "SELECT LOWER('CAFÉ') AS lower_name,CHAR_LENGTH('가나다😀') AS chars,LENGTH('가나다😀') AS bytes",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 82",
+      "sql": "SELECT CONCAT('a','b','c') AS s,CONCAT('x',NULL) AS n",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 83",
+      "sql": "SELECT CONCAT_WS(',',NULL,NULL,'a') AS a,CONCAT_WS(',',NULL,'','b') AS b",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 84",
+      "sql": "SELECT CASE WHEN NULL IS NULL THEN 'yes' ELSE 'no' END AS v",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 85",
+      "sql": "SELECT IFNULL(NULL,5) AS n,COALESCE(NULL,NULL,7) AS c",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 86",
+      "sql": "CREATE TABLE defaults_test(id INT AUTO_INCREMENT PRIMARY KEY,n VARCHAR(5) DEFAULT 'hi',qty INT DEFAULT 7)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 87",
+      "sql": "INSERT INTO defaults_test() VALUES()",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 88",
+      "sql": "SELECT * FROM defaults_test ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 89",
+      "sql": "CREATE TABLE IF NOT EXISTS defaults_test(id INT,n VARCHAR(1),qty INT)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 90",
+      "sql": "INSERT INTO defaults_test(n,qty) VALUES('hello',2)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 91",
+      "sql": "SELECT * FROM defaults_test ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 92",
+      "sql": "ALTER TABLE defaults_test ADD memo VARCHAR(10)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 93",
+      "sql": "UPDATE defaults_test SET memo='updated' WHERE id=1",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 94",
+      "sql": "ALTER TABLE defaults_test DROP COLUMN memo",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 95",
+      "sql": "INSERT INTO defaults_test(n,qty) VALUES('bye',3)",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 96",
+      "sql": "SELECT * FROM defaults_test ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 97",
+      "sql": "SELECT * FROM missing_table",
+      "ok": true,
+      "expectedError": 1146,
+      "error": "1146: 테이블이 없습니다: missing_table"
+    },
+    {
+      "label": "compat 98",
+      "sql": "SELECT missing_column FROM text_test",
+      "ok": true,
+      "expectedError": 1054,
+      "error": "1054: no such column: missing_column"
+    },
+    {
+      "label": "compat 99",
+      "sql": "SELECT name, FROM text_test",
+      "ok": true,
+      "expectedError": 1064,
+      "error": "1064: MySQL 문법 확인: Expected \"#\", \"(\", \"--\", \".\", \"/*\", \":=\", or [ \\t\\n\\r] but \"t\" found."
+    },
+    {
+      "label": "compat 100",
+      "sql": "UPDATE strict_test SET x=1 WHERE id=999",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 101",
+      "sql": "SELECT name FROM text_test WHERE name NOT LIKE '%a%' ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 102",
+      "sql": "SELECT name FROM text_test WHERE qty NOT BETWEEN 1 AND 3 ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    },
+    {
+      "label": "compat 103",
+      "sql": "SELECT id FROM text_test WHERE qty IS NULL OR qty=0 ORDER BY id",
+      "ok": true,
+      "expectedError": null,
+      "error": null
+    }
+  ]
+}

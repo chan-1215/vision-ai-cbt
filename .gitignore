@@ -1,0 +1,10 @@
+node_modules/
+src/sql/worker.bundle.js
+tests/sql/checkpoints.json
+*.tmp
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
