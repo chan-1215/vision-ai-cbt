@@ -1,7 +1,7 @@
 const fs=require('fs'),assert=require('assert'),{makeWorker}=require('./vm_worker.cjs');
-require('../../src/sql/content.js');
+require('../src/content.js');
 let seq=0,pending=new Map();
-const worker=makeWorker(fs.readFileSync(__dirname+'/../../src/sql/worker.bundle.js','utf8'),e=>{const p=pending.get(e.data.id);pending.delete(e.data.id);if(e.data.error)p.reject(Error(e.data.error));else p.resolve(e.data.result);},e=>{throw e;});
+const worker=makeWorker(fs.readFileSync(__dirname+'/../src/worker.bundle.js','utf8'),e=>{const p=pending.get(e.data.id);pending.delete(e.data.id);if(e.data.error)p.reject(Error(e.data.error));else p.resolve(e.data.result);},e=>{throw e;});
 function call(op,p={}){return new Promise((resolve,reject)=>{const id=++seq;pending.set(id,{resolve,reject});worker.postMessage({id,op,...p});});}
 async function main(){
  assert((await call('ping')).ready);

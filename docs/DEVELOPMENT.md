@@ -2,7 +2,7 @@
 
 ## 수정할 위치
 
-- 화면 구성: `src/bigdata/index.template.html`, `src/sql/index.template.html`
+- 화면 구성: `bigdata/src/index.template.html`, `mysql/src/index.template.html`
 - 스타일: 각 폴더의 `style.css`
 - 상호작용: 각 폴더의 `app.js`
 - 빅데이터: `data.js`(CSV와 Python 보조 코드), `code-questions.js`, `choice-questions.js`
@@ -28,10 +28,10 @@ Windows PowerShell에서 `npm.ps1` 실행 정책 오류가 나면 보안 정책�
 | 출력 폴더 | `public` |
 | Node.js | 22 이상 |
 
-직접 업로드 방식에서는 **`public/` 안의 내용**을 배포합니다. 저장소 전체나 `standalone/`을 배포 폴더로 지정하지 않습니다. 서버 함수·DB·환경 변수는 사용하지 않습니다.
+직접 업로드 방식에서는 **`public/` 안의 내용**을 배포합니다. 저장소 전체나 각 과목의 `standalone/`을 배포 폴더로 지정하지 않습니다. 서버 함수·DB·환경 변수는 사용하지 않습니다.
 
 ## 학습 기록
 
 학습 기록은 HTML에 포함되지 않고 브라우저 localStorage에 저장됩니다. 다른 기기·브라우저·도메인으로 옮기기 전 각 공부방에서 내보내기 또는 전체 백업을 실행하세요. 백업 파일에는 사용자의 작성 코드와 진도가 들어갈 수 있으므로 Git에 올리지 않습니다.
 
-`standalone/`의 HTML은 원래 파일을 그대로 보관합니다. 빌드 시 자동 갱신하지 않습니다. `file://`에서 연 파일과 웹사이트는 서로 다른 저장 공간을 사용합니다.
+`bigdata/standalone/`, `mysql/standalone/`의 HTML은 원래 파일을 그대로 보관합니다. 빌드 시 자동 갱신하지 않습니다. `file://`에서 연 파일과 웹사이트는 서로 다른 저장 공간을 사용합니다.

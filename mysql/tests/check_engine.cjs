@@ -1,5 +1,5 @@
 const fs=require('fs'),assert=require('assert');
-require('../../src/sql/engine.js');require('../../src/sql/mysql-compat.js');require('../../src/sql/content.js');
+require('../src/engine.js');require('../src/mysql-compat.js');require('../src/content.js');
 async function main(){
  const SQL=await require('sql.js')(),{Parser}=require('node-sql-parser/build/mysql');
  let state=null;const checkpoints=[null];

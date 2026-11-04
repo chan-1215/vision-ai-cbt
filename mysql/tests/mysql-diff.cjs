@@ -1,5 +1,5 @@
 const fs=require('fs'),crypto=require('crypto'),mysql=require('mysql2/promise');
-require('../../src/sql/engine.js');require('../../src/sql/mysql-compat.js');require('../../src/sql/content.js');
+require('../src/engine.js');require('../src/mysql-compat.js');require('../src/content.js');
 const numTypes=new Set([0,1,2,3,4,5,8,9,13,16,246]);
 function normalize(rows,fields){return rows.map(r=>r.map((v,i)=>v!==null&&numTypes.has(fields?.[i]?.columnType)?Math.round(Number(v)*1e7)/1e7:v));}
 const canonical=rows=>JSON.stringify(rows);
@@ -137,9 +137,9 @@ async function main(){
  "SELECT id FROM text_test WHERE qty IS NULL OR qty=0 ORDER BY id"
  ];
  for(let i=0;i<cases.length;i++)await compare(cases[i],'compat '+(i+1));
- const sourceHash=crypto.createHash('sha256').update(['engine.js','mysql-compat.js','content.js'].map(f=>fs.readFileSync(__dirname+'/../../src/sql/'+f,'utf8')).join('\n')).digest('hex');
+ const sourceHash=crypto.createHash('sha256').update(['engine.js','mysql-compat.js','content.js'].map(f=>fs.readFileSync(__dirname+'/../src/'+f,'utf8')).join('\n')).digest('hex');
  const summary={reference:'MySQL 8.0.46 / strict / utf8mb4_0900_ai_ci',sourceHash,checkedAt:new Date().toISOString(),total:report.length,passed:report.length-failures.length,failures};
- fs.writeFileSync(__dirname+'/../../src/sql/mysql-compat-report.json',JSON.stringify({...summary,tests:report},null,2));
+ fs.writeFileSync(__dirname+'/../src/mysql-compat-report.json',JSON.stringify({...summary,tests:report},null,2));
  console.log(JSON.stringify({...summary,failures:failures.map(f=>({label:f.label,sql:f.sql,error:f.error,expectedError:f.expectedError,expected:f.expected,actual:f.actual}))},null,2));s.close();await c.end();if(failures.length)process.exitCode=1;
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});

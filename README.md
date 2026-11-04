@@ -6,6 +6,13 @@ Python 데이터 분석과 SQL을 연습하는 브라우저 기반 학습 도구
 
 **[사이트에서 시작하기 ↗](https://vision-ai-cbt.pages.dev/)** · [빅데이터 공부방](https://vision-ai-cbt.pages.dev/bigdata/) · [SQL 작업실](https://vision-ai-cbt.pages.dev/sql/)
 
+### 과목별 코드 찾기
+
+| 카테고리 | 소스와 사용 안내 | 문제·개념 | 기능 검사 |
+| --- | --- | --- | --- |
+| 빅데이터 | [bigdata/](bigdata/) | [코드 문제](bigdata/src/code-questions.js) · [객관식·O/X](bigdata/src/choice-questions.js) | [bigdata/tests/](bigdata/tests/) |
+| MySQL | [mysql/](mysql/) | [SQL 문제·개념](mysql/src/content.js) | [mysql/tests/](mysql/tests/) |
+
 | 빅데이터 공부방 | MySQL SQL 작업실 |
 | --- | --- |
 | 5–8장, 총 **336문제** | 데이터베이스 02–07 범위, 총 **52단계** |
@@ -70,21 +77,22 @@ npm run serve
 ## 저장소 구성
 
 ```text
-public/                   현재 사이트 구성 그대로의 배포 파일
-  index.html              과목 선택 홈
-  bigdata/index.html      빅데이터 공부방
-  sql/index.html          SQL 작업실
-src/                      수정용 템플릿·스타일·문제·실행 코드
-  bigdata/
-  sql/
-standalone/               처음 제작한 단일 HTML 두 개의 원본
+bigdata/                  빅데이터 공부방
+  src/                    화면·문제·데이터·Python 실행 코드
+  tests/                  빅데이터 기능 검사
+  standalone/             최초 단일 HTML 원본
+mysql/                    MySQL SQL 작업실
+  src/                    화면·문제·SQL 엔진·호환 계층
+  tests/                  SQL 기능 검사와 MySQL 비교 스크립트
+  standalone/             최초 단일 HTML 원본
+public/                   배포 파일: 홈, /bigdata/, /sql/
 scripts/                  빌드·검사·로컬 실행
-tests/                    문제 진행·채점·백업 등 기능 검사
+tests/                    공통 사이트 경로·링크 검사
 docs/                     배포 안내·검증 범위·배포본 확인 기록
 .github/workflows/        빌드와 기능 검사 자동화
 ```
 
-`standalone/`은 원본 보관용이며 사이트용 공통 이동 메뉴가 없습니다. 사이트를 수정할 때는 `src/`를 수정하고 빌드하여 `public/`에 반영합니다. [개발·배포 안내](docs/DEVELOPMENT.md)
+각 과목의 `standalone/`은 원본 보관용이며 사이트용 공통 이동 메뉴가 없습니다. 수정할 때는 해당 과목의 `src/`를 수정하고 빌드하여 `public/`에 반영합니다. 새 과목도 같은 방식으로 최상위 폴더를 추가할 수 있습니다. [개발·배포 안내](docs/DEVELOPMENT.md)
 
 ## 확인한 내용과 제약
 

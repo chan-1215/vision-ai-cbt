@@ -1,6 +1,6 @@
 node_modules/
-src/sql/worker.bundle.js
-tests/sql/checkpoints.json
+mysql/src/worker.bundle.js
+mysql/tests/checkpoints.json
 *.tmp
 .env
 .env.*

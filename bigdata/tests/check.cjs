@@ -31,8 +31,6 @@ for(const ch of [5,6,7,8])for(const level of [0,1,2])for(const type of ['code','
  d.querySelector('#tab-practice').click();assert(!d.querySelector('#practiceView').hidden);
 }
 for(const q of bank){if(q.type==='mc'){assert(q.a>=0&&q.a<q.o.length);assert.equal(new Set(q.o).size,q.o.length);}if(q.type==='ox')assert.equal(typeof q.a,'boolean');}
-fs.writeFileSync(path.join(__dirname,'test-bank.json'),JSON.stringify(bank));
-fs.writeFileSync(path.join(__dirname,'test-data.json'),JSON.stringify(w.DATA));
 // Restoring a record preserves the draft and advances 5장→6장 at a stage boundary.
 const last=bank.filter(q=>q.ch===5&&q.level===2&&q.type==='code').length-1;
 const restored={ch:5,level:2,type:'code',mode:'all',view:'practice',positions:{'5-2-code-all':last},records:{},drafts:{}};
