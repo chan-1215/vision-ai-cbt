@@ -7,9 +7,9 @@
 - 상호작용: 각 폴더의 `app.js`
 - 빅데이터: `data.js`(CSV와 Python 보조 코드), `code-questions.js`, `choice-questions.js`
 - SQL: `content.js`(문제·개념), `engine.js`, `mysql-compat.js`, `worker.js`
-- 과목 선택 홈: `public/index.html`
+- 과목 선택 홈: `common/public/index.html`
 
-`npm ci` → `npm run build` → `npm test` 순서로 확인합니다. 빌드 결과는 `public/`에 생성됩니다. 런타임 외부 라이브러리를 SQL HTML 안에 포함하므로 파일이 비교적 큽니다. Worker bundle은 중간 생성물이므로 Git에 넣지 않습니다.
+`npm ci` → `npm run build` → `npm test` 순서로 확인합니다. 빌드 결과는 `common/public/`에 생성됩니다. 런타임 외부 라이브러리를 SQL HTML 안에 포함하므로 파일이 비교적 큽니다. Worker bundle은 중간 생성물이므로 Git에 넣지 않습니다.
 
 SQL의 엔진·호환 계층·문제를 변경하면 기존 MySQL 비교 보고서의 소스 해시가 달라져 빌드가 중단됩니다. 이는 과거의 검증 결과를 변경된 코드에 그대로 표시하지 않기 위한 검사입니다. 변경 후 실제 MySQL과 재검증한 보고서가 필요하며, 단순히 해시나 통과 수치를 바꾸어 검사를 우회해서는 안 됩니다. 현재 저장소의 `npm test`는 MySQL 서버 없이 실행 가능한 회귀 검사이며 실제 서버 비교 검사를 대신하지 않습니다.
 
@@ -25,10 +25,10 @@ Windows PowerShell에서 `npm.ps1` 실행 정책 오류가 나면 보안 정책�
 | --- | --- |
 | 프레임워크 | None |
 | 빌드 명령 | `npm ci && npm run build` |
-| 출력 폴더 | `public` |
+| 출력 폴더 | `common/public` |
 | Node.js | 22 이상 |
 
-직접 업로드 방식에서는 **`public/` 안의 내용**을 배포합니다. 저장소 전체나 각 과목의 `standalone/`을 배포 폴더로 지정하지 않습니다. 서버 함수·DB·환경 변수는 사용하지 않습니다.
+직접 업로드 방식에서는 **`common/public/` 안의 내용**을 배포합니다. 저장소 전체나 각 과목의 `standalone/`을 배포 폴더로 지정하지 않습니다. 서버 함수·DB·환경 변수는 사용하지 않습니다.
 
 ## 학습 기록
 

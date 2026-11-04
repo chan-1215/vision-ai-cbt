@@ -4,7 +4,7 @@
   "pages": [
     {
       "url": "https://vision-ai-cbt.pages.dev/",
-      "path": "public/index.html",
+      "path": "common/public/index.html",
       "bytes": 6898,
       "sha256": "2dfd266e138e7e863cbfc3f20405ee6b419fbe51e9c44ba60ebe49d0a52357d5",
       "httpStatus": 200,
@@ -14,7 +14,7 @@
     },
     {
       "url": "https://vision-ai-cbt.pages.dev/sql/",
-      "path": "public/sql/index.html",
+      "path": "common/public/sql/index.html",
       "bytes": 1449774,
       "sha256": "4a612348d6a09aafa91d0eec1bf8645d1973a4906a23875e8cfe3a41e713bd60",
       "httpStatus": 200,
@@ -24,7 +24,7 @@
     },
     {
       "url": "https://vision-ai-cbt.pages.dev/bigdata/",
-      "path": "public/bigdata/index.html",
+      "path": "common/public/bigdata/index.html",
       "bytes": 249013,
       "sha256": "f793c3ba59715283f0b41ac869611b16cf250a02ddd773cb9f8e80a24fa18ea3",
       "httpStatus": 200,

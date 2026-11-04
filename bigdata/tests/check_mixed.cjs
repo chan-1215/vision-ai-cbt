@@ -1,5 +1,5 @@
 const fs=require('fs'),{JSDOM,VirtualConsole}=require('jsdom'),assert=require('assert');
-const html=fs.readFileSync(require('path').join(__dirname,'../../public/bigdata/index.html'),'utf8');
+const html=fs.readFileSync(require('path').join(__dirname,'../../common/public/bigdata/index.html'),'utf8');
 const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
 function open(state){return new JSDOM(html,{url:'https://study.local/',runScripts:'dangerously',virtualConsole:vc,beforeParse(w){w.HTMLElement.prototype.scrollIntoView=()=>{};if(state)w.localStorage.setItem('bd-personal-study-v1',state);}});}
 const dom=open(),w=dom.window,d=w.document,bank=w.STUDY_BANK;

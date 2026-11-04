@@ -46,7 +46,7 @@ Python 데이터 분석과 SQL을 연습하는 브라우저 기반 학습 도구
           └─ 학습 기록 → localStorage ↔ JSON 백업
 ```
 
-SQL은 **실제 MySQL 서버가 아닙니다.** `node-sql-parser`의 MySQL 파서와 직접 구현한 호환 계층으로 학습 범위의 동작을 재현합니다. 자료형 변환, 문자열 비교, `NULL`, 집계·`GROUP BY`, `AUTO_INCREMENT`, 오류 처리 등을 보완했습니다. 실제 MySQL 8.0.46과 비교한 **175건이 모두 통과한 검증 보고서**를 포함하지만, 이것이 MySQL 전체 기능의 호환을 뜻하지는 않습니다. [검증 범위와 한계](docs/VALIDATION.md)를 함께 확인하세요.
+SQL은 **실제 MySQL 서버가 아닙니다.** `node-sql-parser`의 MySQL 파서와 직접 구현한 호환 계층으로 학습 범위의 동작을 재현합니다. 자료형 변환, 문자열 비교, `NULL`, 집계·`GROUP BY`, `AUTO_INCREMENT`, 오류 처리 등을 보완했습니다. 실제 MySQL 8.0.46과 비교한 **175건이 모두 통과한 검증 보고서**를 포함하지만, 이것이 MySQL 전체 기능의 호환을 뜻하지는 않습니다. [검증 범위와 한계](common/docs/VALIDATION.md)를 함께 확인하세요.
 
 | 구분 | 기술 |
 | --- | --- |
@@ -72,7 +72,7 @@ npm test
 npm run serve
 ```
 
-`http://127.0.0.1:4173`에서 두 공부방을 확인할 수 있습니다. `public/`에는 빌드 결과가 이미 들어 있어, 배포된 파일을 사용하는 데 빌드는 필수가 아닙니다.
+`http://127.0.0.1:4173`에서 두 공부방을 확인할 수 있습니다. `common/public/`에는 빌드 결과가 이미 들어 있어, 배포된 파일을 사용하는 데 빌드는 필수가 아닙니다.
 
 ## 저장소 구성
 
@@ -85,14 +85,18 @@ mysql/                    MySQL SQL 작업실
   src/                    화면·문제·SQL 엔진·호환 계층
   tests/                  SQL 기능 검사와 MySQL 비교 스크립트
   standalone/             최초 단일 HTML 원본
-public/                   배포 파일: 홈, /bigdata/, /sql/
-scripts/                  빌드·검사·로컬 실행
-tests/                    공통 사이트 경로·링크 검사
-docs/                     배포 안내·검증 범위·배포본 확인 기록
+common/                   두 과목이 함께 쓰는 운영 파일
+  public/                 배포 파일: 홈, /bigdata/, /sql/
+  scripts/                빌드·검사·로컬 실행
+  tests/                  공통 사이트 경로·링크 검사
+  docs/                   배포·개발·검증 안내
+  licenses/               외부 라이브러리 라이선스
 .github/workflows/        빌드와 기능 검사 자동화
 ```
 
-각 과목의 `standalone/`은 원본 보관용이며 사이트용 공통 이동 메뉴가 없습니다. 수정할 때는 해당 과목의 `src/`를 수정하고 빌드하여 `public/`에 반영합니다. 새 과목도 같은 방식으로 최상위 폴더를 추가할 수 있습니다. [개발·배포 안내](docs/DEVELOPMENT.md)
+각 과목의 `standalone/`은 원본 보관용이며 사이트용 공통 이동 메뉴가 없습니다. 수정할 때는 해당 과목의 `src/`를 수정하고 빌드하여 `common/public/`에 반영합니다. 새 과목도 같은 방식으로 최상위 폴더를 추가할 수 있습니다. [개발·배포 안내](common/docs/DEVELOPMENT.md)
+
+일반적인 수정은 `bigdata/`, `mysql/`에서 진행합니다. 배포와 개발 도구는 [common/](common/)에 모았습니다. 루트의 `package.json`·잠금 파일은 설치·실행을 위한 설정이며, `.github/`는 자동 검사가 인식하는 고정 위치입니다.
 
 ## 확인한 내용과 제약
 
@@ -104,4 +108,4 @@ docs/                     배포 안내·검증 범위·배포본 확인 기록
 
 ## 라이선스 안내
 
-사용한 외부 라이브러리는 각 라이선스를 따릅니다. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)를 확인하세요. 프로젝트 자체에는 별도의 오픈소스 라이선스를 부여하지 않았으며, 저장소 공개만으로 자유로운 재배포 권한이 부여되는 것은 아닙니다.
+사용한 외부 라이브러리는 각 라이선스를 따릅니다. [THIRD_PARTY_NOTICES.md](common/THIRD_PARTY_NOTICES.md)를 확인하세요. 프로젝트 자체에는 별도의 오픈소스 라이선스를 부여하지 않았으며, 저장소 공개만으로 자유로운 재배포 권한이 부여되는 것은 아닙니다.

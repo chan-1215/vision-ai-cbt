@@ -1,5 +1,5 @@
 const fs=require('fs'),assert=require('assert'),{JSDOM,VirtualConsole}=require('jsdom'),{makeWorker}=require('./vm_worker.cjs');
-const html=fs.readFileSync(require('path').join(__dirname,'../../public/sql/index.html'),'utf8'),errors=[],downloads=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
+const html=fs.readFileSync(require('path').join(__dirname,'../../common/public/sql/index.html'),'utf8'),errors=[],downloads=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
 function open(saved){
  return new JSDOM(html,{runScripts:'dangerously',url:'https://sql-offline.local/',virtualConsole:vc,beforeParse(w){
   w.HTMLElement.prototype.scrollIntoView=()=>{};w.confirm=()=>true;w.alert=m=>errors.push(m);

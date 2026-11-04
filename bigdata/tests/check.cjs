@@ -1,5 +1,5 @@
 const fs=require('fs'),path=require('path'),{JSDOM,VirtualConsole}=require('jsdom'),assert=require('assert');
-const file=path.join(__dirname,'../../public/bigdata/index.html');
+const file=path.join(__dirname,'../../common/public/bigdata/index.html');
 const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
 const html=fs.readFileSync(file,'utf8');
 const dom=new JSDOM(html,{runScripts:'dangerously',url:'https://study.local/',virtualConsole:vc});

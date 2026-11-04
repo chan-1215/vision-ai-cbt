@@ -1,5 +1,5 @@
 const fs=require('fs'),{JSDOM}=require('jsdom'),assert=require('assert');
-const html=fs.readFileSync(require('path').join(__dirname,'../../public/bigdata/index.html'),'utf8');
+const html=fs.readFileSync(require('path').join(__dirname,'../../common/public/bigdata/index.html'),'utf8');
 async function main(){
  const dom=new JSDOM(html,{url:'https://study.local/',runScripts:'dangerously',beforeParse(w){
   w.URL.createObjectURL=()=> 'blob:testing';w.URL.revokeObjectURL=()=>{};

@@ -15,6 +15,6 @@ DB 생성부터 조회·수정·집계·삭제까지 이어지는 52단계 SQL �
 | MySQL 비교 검증 보고서 | [src/mysql-compat-report.json](src/mysql-compat-report.json) |
 | 기능 검사 | [tests/](tests/) |
 | 최초 단일 HTML 원본 | [standalone/](standalone/) |
-| 사이트용 빌드 결과 | [../public/sql/index.html](../public/sql/index.html) |
+| 사이트용 빌드 결과 | [../common/public/sql/index.html](../common/public/sql/index.html) |
 
-저장소 루트에서 `npm ci`, `npm run build`, `npm test`, `npm run serve` 순서로 실행합니다. 실제 MySQL 서버 없이 오프라인으로 사용할 수 있는 호환 구현입니다. MySQL 전체 기능을 재현하지 않으며, 엔진·문제 변경 시 보고서 재검증이 필요합니다. [검증 범위](../docs/VALIDATION.md) · [개발 안내](../docs/DEVELOPMENT.md)
+저장소 루트에서 `npm ci`, `npm run build`, `npm test`, `npm run serve` 순서로 실행합니다. 실제 MySQL 서버 없이 오프라인으로 사용할 수 있는 호환 구현입니다. MySQL 전체 기능을 재현하지 않으며, 엔진·문제 변경 시 보고서 재검증이 필요합니다. [검증 범위](../common/docs/VALIDATION.md) · [개발 안내](../common/docs/DEVELOPMENT.md)

@@ -14,6 +14,6 @@
 | 테마와 스타일 | [src/style.css](src/style.css) |
 | 기능 검사 | [tests/](tests/) |
 | 최초 단일 HTML 원본 | [standalone/](standalone/) |
-| 사이트용 빌드 결과 | [../public/bigdata/index.html](../public/bigdata/index.html) |
+| 사이트용 빌드 결과 | [../common/public/bigdata/index.html](../common/public/bigdata/index.html) |
 
-저장소 루트에서 `npm ci`, `npm run build`, `npm test`, `npm run serve` 순서로 실행합니다. Python 코드 실행에는 Pyodide와 패키지를 불러올 인터넷 연결이 필요합니다. 검사 범위는 [검증 안내](../docs/VALIDATION.md)를 참고하세요.
+저장소 루트에서 `npm ci`, `npm run build`, `npm test`, `npm run serve` 순서로 실행합니다. Python 코드 실행에는 Pyodide와 패키지를 불러올 인터넷 연결이 필요합니다. 검사 범위는 [검증 안내](../common/docs/VALIDATION.md)를 참고하세요.

@@ -7,9 +7,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "node scripts/build.cjs",
-    "test": "node scripts/test.cjs",
-    "serve": "node scripts/serve.cjs"
+    "build": "node common/scripts/build.cjs",
+    "test": "node common/scripts/test.cjs",
+    "serve": "node common/scripts/serve.cjs"
   },
   "dependencies": {
     "node-sql-parser": "5.3.13",
