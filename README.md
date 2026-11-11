@@ -42,16 +42,13 @@ Python 데이터 분석과 SQL을 연습하는 브라우저 기반 학습 도구
 - **학습 기록 이동:** 브라우저에 진도와 작성 내용을 저장하고, 내보내기·백업으로 다른 기기에 옮길 수 있습니다.
 - **화면 설정:** 어두운 테마와 밝은 테마를 전환할 수 있습니다.
 
-## 구현
+## 시스템 아키텍처
 
 별도 애플리케이션 서버 없이 HTML·CSS·JavaScript로 동작하는 정적 사이트입니다. Cloudflare Pages에서 제공하며, SQL과 Python 실행은 브라우저에서 처리합니다.
 
-```text
-학습자 → HTML / CSS / JavaScript
-          ├─ 빅데이터 → Web Worker → Pyodide → pandas / NumPy / seaborn
-          ├─ SQL      → Web Worker → MySQL 구문 해석 → 호환 처리 → SQL.js / SQLite WASM
-          └─ 학습 기록 → localStorage ↔ JSON 백업
-```
+![Vision AI CBT 아키텍처: Cloudflare Pages의 정적 파일 제공, 브라우저 내 Python·SQL Worker 실행, localStorage와 JSON 백업](common/docs/images/architecture.png)
+
+[그림 크게 보기](common/docs/images/architecture.png) · [수정 가능한 SVG](common/docs/images/architecture.svg) · [실행 흐름과 코드 위치](common/docs/ARCHITECTURE.md)
 
 SQL은 **실제 MySQL 서버가 아닙니다.** `node-sql-parser`의 MySQL 파서와 직접 구현한 호환 계층으로 학습 범위의 동작을 재현합니다. 자료형 변환, 문자열 비교, `NULL`, 집계·`GROUP BY`, `AUTO_INCREMENT`, 오류 처리 등을 보완했습니다. 실제 MySQL 8.0.46과 비교한 **175건이 모두 통과한 검증 보고서**를 포함하지만, 이것이 MySQL 전체 기능의 호환을 뜻하지는 않습니다. [검증 범위와 한계](common/docs/VALIDATION.md)를 함께 확인하세요.
 
