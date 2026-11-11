@@ -50,6 +50,8 @@ Python 데이터 분석과 SQL을 연습하는 브라우저 기반 학습 도구
 
 [그림 크게 보기](common/docs/images/architecture.png) · [수정 가능한 SVG](common/docs/images/architecture.svg) · [실행 흐름과 코드 위치](common/docs/ARCHITECTURE.md)
 
+위 그림은 웹 공부방의 구조입니다. 별도 PC 환경에서 동작하는 Workbench 학습 AI는 [전용 아키텍처 그림](mysql/학습%20AI/docs/ARCHITECTURE.md)에서 확인할 수 있습니다.
+
 SQL은 **실제 MySQL 서버가 아닙니다.** `node-sql-parser`의 MySQL 파서와 직접 구현한 호환 계층으로 학습 범위의 동작을 재현합니다. 자료형 변환, 문자열 비교, `NULL`, 집계·`GROUP BY`, `AUTO_INCREMENT`, 오류 처리 등을 보완했습니다. 실제 MySQL 8.0.46과 비교한 **175건이 모두 통과한 검증 보고서**를 포함하지만, 이것이 MySQL 전체 기능의 호환을 뜻하지는 않습니다. [검증 범위와 한계](common/docs/VALIDATION.md)를 함께 확인하세요.
 
 | 구분 | 기술 |

@@ -6,6 +6,12 @@ MySQL Workbench SQL 편집기에서 `#한글 요청`을 입력하고 Enter를 �
 
 [설치·사용법](docs/USAGE.md) · [구조](docs/ARCHITECTURE.md) · [검증 범위](docs/VALIDATION.md) · [데이터와 기록](docs/PRIVACY.md) · [외부 구성 요소](THIRD_PARTY.md) · [MySQL 작업실로](../README.md)
 
+## 시스템 아키텍처
+
+![Workbench 학습 AI: 한글 요청을 플러그인에서 받아 로컬 Ollama로 SQL을 생성하고, 편집 상태 재확인 후 삽입하며 사용자가 직접 실행](docs/images/architecture.png)
+
+[그림 크게 보기](docs/images/architecture.png) · [수정 가능한 SVG](docs/images/architecture.svg) · [동작 상세](docs/ARCHITECTURE.md)
+
 ## 학습에 사용하는 방법
 
 1. [웹 SQL 작업실](https://vision-ai-cbt.pages.dev/sql/)에서 문제와 개념을 확인하고 먼저 SQL을 작성합니다.

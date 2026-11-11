@@ -2,6 +2,12 @@
 
 [학습 AI 홈](../README.md)
 
+![MySQL Workbench 학습 AI 아키텍처](images/architecture.png)
+
+[PNG 크게 보기](images/architecture.png) · [수정 가능한 SVG](images/architecture.svg)
+
+파란 점선은 사용자 PC의 Workbench·로컬 AI 영역입니다. 아래 MySQL DB는 Workbench의 연결 대상으로, 반드시 같은 PC에 설치된 DB라는 뜻은 아닙니다. 생성 SQL은 편집기에만 삽입되며 학습자가 검토 후 직접 실행합니다. 청록색 점선은 선택 메뉴로 읽는 열 메타데이터 흐름입니다.
+
 ```mermaid
 flowchart TD
     A[Workbench의 한글 요청 주석] --> B[플러그인 메뉴 또는 타이머]
