@@ -6,6 +6,12 @@ Python 데이터 분석과 SQL을 연습하는 브라우저 기반 학습 도구
 
 **[사이트에서 시작하기 ↗](https://vision-ai-cbt.pages.dev/)** · [빅데이터 공부방](https://vision-ai-cbt.pages.dev/bigdata/) · [SQL 작업실](https://vision-ai-cbt.pages.dev/sql/)
 
+## 아키텍처
+
+![Vision AI CBT 아키텍처 — 웹 CBT와 별도 Workbench 학습 AI](common/docs/assets/architecture.svg)
+
+웹 CBT는 브라우저에서 SQL·Python을 실행하고 학습 기록을 로컬에 저장합니다. 아래의 Workbench 학습 AI는 별도 Windows 도구이며, 웹 CBT와의 AI 연결은 아직 구현하지 않았습니다. [원본 크게 보기](common/docs/assets/architecture.svg)
+
 ### 과목별 코드 찾기
 
 | 카테고리 | 소스와 사용 안내 | 문제·개념 | 기능 검사 |
