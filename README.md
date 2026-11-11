@@ -12,6 +12,7 @@ Python 데이터 분석과 SQL을 연습하는 브라우저 기반 학습 도구
 | --- | --- | --- | --- |
 | 빅데이터 | [bigdata/](bigdata/) | [코드 문제](bigdata/src/code-questions.js) · [객관식·O/X](bigdata/src/choice-questions.js) | [bigdata/tests/](bigdata/tests/) |
 | MySQL | [mysql/](mysql/) | [SQL 문제·개념](mysql/src/content.js) | [mysql/tests/](mysql/tests/) |
+| MySQL 학습 AI | [mysql/학습 AI/](mysql/학습%20AI/README.md) | 한글 요청 → SQL, Workbench·Ollama 로컬 실행 | [Python 테스트](mysql/학습%20AI/test_local_ai.py) |
 
 | 빅데이터 공부방 | MySQL SQL 작업실 |
 | --- | --- |
@@ -82,6 +83,7 @@ bigdata/                  빅데이터 공부방
   tests/                  빅데이터 기능 검사
   standalone/             최초 단일 HTML 원본
 mysql/                    MySQL SQL 작업실
+  학습 AI/                Workbench용 로컬 한글 SQL 도우미·설치·테스트·문서
   src/                    화면·문제·SQL 엔진·호환 계층
   tests/                  SQL 기능 검사와 MySQL 비교 스크립트
   standalone/             최초 단일 HTML 원본

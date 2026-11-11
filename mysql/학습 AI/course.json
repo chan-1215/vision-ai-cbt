@@ -1,0 +1,265 @@
+{
+  "create": "CREATE TABLE products (\n  product_id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(50) NOT NULL,\n  category VARCHAR(20),\n  price INT NOT NULL,\n  stock INT,\n  added_on DATE\n);",
+  "steps": [
+    {
+      "title": "매장 데이터베이스 만들기",
+      "task": "store_lab이라는 데이터베이스를 만드세요. 한글 저장을 위한 CHARACTER SET utf8mb4 옵션도 적으세요.",
+      "answer": "CREATE DATABASE store_lab CHARACTER SET utf8mb4;"
+    },
+    {
+      "title": "작업할 DB 선택하기",
+      "task": "방금 만든 store_lab을 앞으로 사용할 DB로 선택하세요.",
+      "answer": "USE store_lab;"
+    },
+    {
+      "title": "현재 DB 이름 확인",
+      "task": "현재 선택한 데이터베이스 이름을 조회하세요.",
+      "answer": "SELECT DATABASE();"
+    },
+    {
+      "title": "상품 테이블 설계",
+      "task": "products 테이블을 만드세요. 아래 열 순서와 자료형을 지키세요.\nproduct_id: INT, AUTO_INCREMENT, PRIMARY KEY\nname: VARCHAR(50), NOT NULL\ncategory: VARCHAR(20)\nprice: INT, NOT NULL\nstock: INT\nadded_on: DATE",
+      "answer": "CREATE TABLE products (\n  product_id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(50) NOT NULL,\n  category VARCHAR(20),\n  price INT NOT NULL,\n  stock INT,\n  added_on DATE\n);"
+    },
+    {
+      "title": "테이블 구조 살펴보기",
+      "task": "DESC를 사용해 products의 열·자료형·기본 키 정보를 조회하세요.",
+      "answer": "DESC products;"
+    },
+    {
+      "title": "메모 열 추가하기",
+      "task": "products의 마지막에 memo VARCHAR(100) 열을 추가하세요.",
+      "answer": "ALTER TABLE products ADD memo VARCHAR(100);"
+    },
+    {
+      "title": "첫 상품 한 개 등록",
+      "task": "아래 상품 한 개를 INSERT로 추가하세요. product_id와 memo는 직접 넣지 마세요.\n상품명: 무선 마우스 / 분류: 전자 / 가격: 18000 / 재고: 12 / 입고일: 2026-10-01",
+      "answer": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('무선 마우스', '전자', 18000, 12, '2026-10-01');"
+    },
+    {
+      "title": "나머지 상품 등록",
+      "task": "아래 표의 상품 11개를 모두 추가하세요. 각 상품의 모든 값을 정확히 넣고, NULL에는 따옴표를 쓰지 마세요.\nproduct_id와 memo는 생략하세요. 여러 INSERT문을 사용해도 됩니다.",
+      "answer": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('기계식 키보드', '전자', 55000, 5, '2026-10-02'),\n  ('USB 허브', '전자', 25000, 8, '2026-10-03'),\n  ('스프링 노트', '문구', 3000, 30, '2026-10-04'),\n  ('검정 볼펜', '문구', 1500, 50, '2026-10-05'),\n  ('텀블러', '생활', 12000, 10, '2026-10-06'),\n  ('머그컵', '생활', 8000, 15, '2026-10-07'),\n  ('충전 케이블', '전자', 9000, 20, '2026-10-08'),\n  ('형광펜 세트', '문구', 5000, 25, '2026-10-09'),\n  ('장바구니', '생활', 4000, 18, '2026-10-10'),\n  ('선물 포장', NULL, 1000, NULL, '2026-10-11'),\n  ('노트북 파우치', '생활', 22000, 6, '2026-10-12');"
+    },
+    {
+      "title": "등록 수 확인",
+      "task": "전체 상품 행 수를 COUNT(*)로 세고 열 제목을 상품수로 표시하세요.",
+      "answer": "SELECT COUNT(*) AS 상품수 FROM products;"
+    },
+    {
+      "title": "모든 열·행 조회",
+      "task": "products의 모든 열과 모든 행을 조회하세요. 정렬은 지정하지 않아도 됩니다.",
+      "answer": "SELECT * FROM products;"
+    },
+    {
+      "title": "필요한 열만 선택",
+      "task": "name, price 두 열만 이 순서로 조회하세요.",
+      "answer": "SELECT name, price FROM products;"
+    },
+    {
+      "title": "한글 별명 붙이기",
+      "task": "name은 상품명, price는 가격이라는 결과 열 제목으로 조회하세요. AS를 사용하세요.",
+      "answer": "SELECT name AS 상품명, price AS 가격 FROM products;"
+    },
+    {
+      "title": "열 순서 바꾸기",
+      "task": "price가 먼저, name이 두 번째로 나오도록 조회하세요.",
+      "answer": "SELECT price, name FROM products;"
+    },
+    {
+      "title": "전자 상품 찾기",
+      "task": "category가 전자인 상품의 name, category, price를 조회하세요.",
+      "answer": "SELECT name, category, price FROM products WHERE category = '전자';"
+    },
+    {
+      "title": "경계값을 포함한 비교",
+      "task": "가격이 12000원 이상인 상품의 name, price를 조회하세요.",
+      "answer": "SELECT name, price FROM products WHERE price >= 12000;"
+    },
+    {
+      "title": "같지 않은 값 찾기",
+      "task": "분류가 문구가 아닌 상품의 name, category를 조회하세요. !=를 사용하세요.",
+      "answer": "SELECT name, category FROM products WHERE category != '문구';"
+    },
+    {
+      "title": "두 조건 모두 만족",
+      "task": "전자 상품이면서 가격이 25000원 이하인 상품의 name, category, price를 조회하세요. AND를 사용하세요.",
+      "answer": "SELECT name, category, price FROM products WHERE category = '전자' AND price <= 25000;"
+    },
+    {
+      "title": "둘 중 하나를 만족",
+      "task": "문구 또는 생활 분류에 속하는 상품의 name, category를 조회하세요. OR를 사용하세요.",
+      "answer": "SELECT name, category FROM products WHERE category = '문구' OR category = '생활';"
+    },
+    {
+      "title": "괄호로 조건 묶기",
+      "task": "전자 또는 생활 상품 중 가격이 12000원 이상인 상품의 name, category, price를 조회하세요. OR와 AND를 함께 사용하세요.",
+      "answer": "SELECT name, category, price FROM products WHERE (category = '전자' OR category = '생활') AND price >= 12000;"
+    },
+    {
+      "title": "비어 있는 재고 찾기",
+      "task": "stock이 NULL인 상품의 name, stock을 조회하세요.",
+      "answer": "SELECT name, stock FROM products WHERE stock IS NULL;"
+    },
+    {
+      "title": "분류가 입력된 상품",
+      "task": "category가 NULL이 아닌 상품의 name, category를 조회하세요.",
+      "answer": "SELECT name, category FROM products WHERE category IS NOT NULL;"
+    },
+    {
+      "title": "가격 범위로 찾기",
+      "task": "가격이 5000원 이상 20000원 이하인 상품의 name, price를 BETWEEN으로 조회하세요.",
+      "answer": "SELECT name, price FROM products WHERE price BETWEEN 5000 AND 20000;"
+    },
+    {
+      "title": "목록 중 하나 찾기",
+      "task": "전자와 문구 상품의 name, category를 IN으로 조회하세요.",
+      "answer": "SELECT name, category FROM products WHERE category IN ('전자', '문구');"
+    },
+    {
+      "title": "이름 일부로 찾기",
+      "task": "이름 어디에든 노트가 들어간 상품의 name, price를 LIKE로 조회하세요.",
+      "answer": "SELECT name, price FROM products WHERE name LIKE '%노트%';"
+    },
+    {
+      "title": "이름 끝부분 검색",
+      "task": "이름이 세트로 끝나는 상품의 name, price를 조회하세요. LIKE를 사용하세요.",
+      "answer": "SELECT name, price FROM products WHERE name LIKE '%세트';"
+    },
+    {
+      "title": "싼 상품부터 정렬",
+      "task": "name, price를 가격 오름차순으로 조회하세요. 가격이 같으면 product_id 오름차순으로 정렬하세요.",
+      "answer": "SELECT name, price FROM products ORDER BY price ASC, product_id ASC;"
+    },
+    {
+      "title": "최근 입고 순서",
+      "task": "name, added_on을 최근 날짜부터 조회하세요. 같은 날짜면 product_id 내림차순으로 정렬하세요.",
+      "answer": "SELECT name, added_on FROM products ORDER BY added_on DESC, product_id DESC;"
+    },
+    {
+      "title": "중복 없이 분류 보기",
+      "task": "category를 중복 없이 한 번씩 조회하세요. NULL도 결과에 남겨 두세요.",
+      "answer": "SELECT DISTINCT category FROM products;"
+    },
+    {
+      "title": "가격 상위 3개",
+      "task": "가장 비싼 상품 3개의 name, price를 비싼 순서로 조회하세요. 가격이 같으면 product_id 오름차순으로 정렬하세요.",
+      "answer": "SELECT name, price FROM products ORDER BY price DESC, product_id ASC LIMIT 3;"
+    },
+    {
+      "title": "조건·정렬·제한 합치기",
+      "task": "전자 상품 중 비싼 2개의 name, category, price를 조회하세요. 가격이 같으면 product_id 오름차순으로 정렬하세요.",
+      "answer": "SELECT name, category, price FROM products WHERE category = '전자' ORDER BY price DESC, product_id ASC LIMIT 2;"
+    },
+    {
+      "title": "한 상품 가격 수정",
+      "task": "product_id가 1인 상품의 price를 20000으로 바꾸세요. 다른 값은 바꾸지 마세요.",
+      "answer": "UPDATE products SET price = 20000 WHERE product_id = 1;"
+    },
+    {
+      "title": "여러 상품 재고 올리기",
+      "task": "product_id가 1 또는 3인 상품의 stock을 각각 5씩 증가시키세요. IN을 사용하세요.",
+      "answer": "UPDATE products SET stock = stock + 5 WHERE product_id IN (1, 3);"
+    },
+    {
+      "title": "분류 전체 가격 인상",
+      "task": "문구 상품의 price를 각각 500원씩 올리세요.",
+      "answer": "UPDATE products SET price = price + 500 WHERE category = '문구';"
+    },
+    {
+      "title": "메모 기록하기",
+      "task": "product_id가 2인 상품의 memo에 인기상품이라고 기록하세요.",
+      "answer": "UPDATE products SET memo = '인기상품' WHERE product_id = 2;"
+    },
+    {
+      "title": "대표 집계 한 번에 보기",
+      "task": "전체 상품의 행 수, 가격 합계, 평균, 최댓값, 최솟값을 이 순서로 조회하세요.\n열 제목: 상품수, 가격합계, 평균가격, 최고가격, 최저가격",
+      "answer": "SELECT COUNT(*) AS 상품수, SUM(price) AS 가격합계, AVG(price) AS 평균가격, MAX(price) AS 최고가격, MIN(price) AS 최저가격 FROM products;"
+    },
+    {
+      "title": "COUNT의 차이",
+      "task": "전체 행 수와 stock 값이 있는 행 수를 이 순서로 조회하세요.\nCOUNT(*)와 COUNT(stock)을 사용하고 열 제목은 전체행, 재고입력행으로 하세요.",
+      "answer": "SELECT COUNT(*) AS 전체행, COUNT(stock) AS 재고입력행 FROM products;"
+    },
+    {
+      "title": "조건으로 고른 뒤 합계",
+      "task": "전자 상품만 남긴 뒤 price의 합계를 전자총액이라는 열 제목으로 조회하세요.",
+      "answer": "SELECT SUM(price) AS 전자총액 FROM products WHERE category = '전자';"
+    },
+    {
+      "title": "분류별 상품 수",
+      "task": "분류별 행 수를 구하세요. 결과 열은 category, 상품수 순서입니다. NULL 분류도 하나의 그룹으로 포함하세요.",
+      "answer": "SELECT category, COUNT(*) AS 상품수 FROM products GROUP BY category;"
+    },
+    {
+      "title": "분류별 합계와 평균",
+      "task": "분류별로 category, 상품수, 가격합계, 평균가격을 조회하세요.\n상품수는 COUNT(*), 가격합계는 SUM(price), 평균가격은 AVG(price)입니다.\n가격합계가 큰 순서로 정렬하세요. 합계가 같으면 category 오름차순입니다.",
+      "answer": "SELECT category, COUNT(*) AS 상품수, SUM(price) AS 가격합계, AVG(price) AS 평균가격 FROM products GROUP BY category ORDER BY 가격합계 DESC, category ASC;"
+    },
+    {
+      "title": "행 조건과 그룹 결합",
+      "task": "price가 5000원 이상인 상품만 대상으로 분류별 상품 수를 구하세요.\n결과 열은 category, 상품수 순서이며 category 오름차순으로 정렬하세요.",
+      "answer": "SELECT category, COUNT(*) AS 상품수 FROM products WHERE price >= 5000 GROUP BY category ORDER BY category ASC;"
+    },
+    {
+      "title": "삭제 연습용 상품 추가",
+      "task": "테스트 상품이라는 이름의 상품 1개를 넣으세요. category는 NULL, price는 0, stock은 0, added_on은 2026-10-20입니다. ID와 memo는 생략하세요.",
+      "answer": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('테스트 상품', NULL, 0, 0, '2026-10-20');"
+    },
+    {
+      "title": "지울 상품 번호 확인",
+      "task": "이름이 테스트 상품인 행의 product_id, name을 조회하세요.",
+      "answer": "SELECT product_id, name FROM products WHERE name = '테스트 상품';"
+    },
+    {
+      "title": "번호로 한 행 삭제",
+      "task": "방금 확인한 product_id가 13인 상품만 DELETE로 지우세요.",
+      "answer": "DELETE FROM products WHERE product_id = 13;"
+    },
+    {
+      "title": "삭제 후 상품 수",
+      "task": "현재 행 수를 COUNT(*)로 세고 제목을 상품수로 표시하세요.",
+      "answer": "SELECT COUNT(*) AS 상품수 FROM products;"
+    },
+    {
+      "title": "다음 자동 번호 정리",
+      "task": "products의 AUTO_INCREMENT 설정을 1로 지정하세요. 현재 최대 ID가 있으므로 실제 다음 번호는 최대 ID 다음 번호로 정해집니다.",
+      "answer": "ALTER TABLE products AUTO_INCREMENT = 1;"
+    },
+    {
+      "title": "자동 번호 다시 확인",
+      "task": "테스트 상품2를 추가하세요. category NULL, price 0, stock 0, added_on 2026-10-21이며 ID와 memo는 생략합니다.\n추가한 뒤 같은 이름의 product_id, name을 조회하세요.",
+      "answer": "INSERT INTO products (name, category, price, stock, added_on)\nVALUES\n  ('테스트 상품2', NULL, 0, 0, '2026-10-21');\nSELECT product_id, name FROM products WHERE name = '테스트 상품2';"
+    },
+    {
+      "title": "이름으로 삭제",
+      "task": "이름이 테스트 상품2인 행만 삭제하세요.",
+      "answer": "DELETE FROM products WHERE name = '테스트 상품2';"
+    },
+    {
+      "title": "최종 분류별 보고서",
+      "task": "category가 NULL이 아닌 상품만 대상으로 분류별 상품 수와 가격 합계를 조회하세요.\n열 제목은 분류, 상품수, 가격합계이며 가격합계 내림차순, 동점이면 분류 오름차순입니다.",
+      "answer": "SELECT category AS 분류, COUNT(*) AS 상품수, SUM(price) AS 가격합계 FROM products WHERE category IS NOT NULL GROUP BY category ORDER BY 가격합계 DESC, 분류 ASC;"
+    },
+    {
+      "title": "연습용 작은 표 만들기",
+      "task": "scratch라는 테이블을 만들고 note VARCHAR(20) 열 하나만 두세요. products는 건드리지 마세요.",
+      "answer": "CREATE TABLE scratch (note VARCHAR(20));"
+    },
+    {
+      "title": "작은 표에 데이터 넣기",
+      "task": "scratch의 note 열에 확인용이라는 값 한 행을 추가하세요.",
+      "answer": "INSERT INTO scratch (note) VALUES ('확인용');"
+    },
+    {
+      "title": "행만 전부 지우기",
+      "task": "scratch의 모든 행을 DELETE로 지우세요. 테이블 자체는 남겨 두세요.",
+      "answer": "DELETE FROM scratch;"
+    },
+    {
+      "title": "빈 테이블 자체 삭제",
+      "task": "이제 scratch 테이블 자체를 삭제하세요. products는 유지하세요.",
+      "answer": "DROP TABLE scratch;"
+    }
+  ]
+}

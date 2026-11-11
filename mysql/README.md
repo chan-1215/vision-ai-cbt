@@ -4,6 +4,14 @@ DB 생성부터 조회·수정·집계·삭제까지 이어지는 52단계 SQL �
 
 **[작업실 열기](https://vision-ai-cbt.pages.dev/sql/)** · [프로젝트 홈](../README.md)
 
+### Workbench용 학습 AI
+
+[**학습 AI 폴더 열기 →**](학습%20AI/README.md)
+
+한글 요청을 MySQL SQL로 바꿔 주는 Windows Workbench용 로컬 교육 보조 도구입니다. Ollama와 `qwen2.5-coder:3b`를 사용하고, SQL을 자동 실행하지 않습니다. 설치·사용법, 소스, 52개 참고 예제, 테스트와 검증 한계를 정리했습니다. 브라우저 작업실과 별도로 Workbench에서 실행하며 모델 가중치는 저장소에 포함하지 않습니다.
+
+### 웹 SQL 작업실 소스
+
 | 수정할 내용 | 파일 |
 | --- | --- |
 | 단계별 문제·정답·개념 정리 | [src/content.js](src/content.js) |
